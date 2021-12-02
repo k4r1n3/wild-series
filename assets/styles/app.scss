@@ -6,6 +6,11 @@
   $secondary: #5ABFC7;
   $blue-light: #F5F5F7;
 
+#bootstrap-override .navbar {
+  background-color: $secondary;
+  color: $primary;
+}
+
 body {
   background-color: $primary;
 }

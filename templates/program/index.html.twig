@@ -1,5 +1,16 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    <h1>Bienvenue !</h1>
-    <img src="{{ asset('build/images/homer.png') }}" alt=""/>
+<h1 class="text-light">Toutes les séries de la table program : </h1>
+{% for program in programs %}
+    <div>
+        <h2 class="text-light">{{ loop.index }} / {{ program.title }} - Catégorie : {{ program.category.name }}</h2>
+        <p class="text-light">{{ program.summary }}</p>
+        {# Lien vers la fiche de la série : #}
+        <a class="text-warning" href="{{ path("program_show", { programId: program.id }) }}">Voir la fiche</a>
+    </div>
+    {% else %}
+        Aucune série trouvée.
+    {% endfor %}
+
+
 {% endblock %}
