@@ -5,7 +5,7 @@
         <ul>
             {% for program in programs %}
                 <li class="text-start"><p>{{ program.id }} - {{ program.title }}</p>
-                    <p>Description: {{ program.summary }} <a href="{{ path("program_show", {programId: program.id}) }}">Découvrir cette série</a></p>
+                    <p>Description: {{ program.summary }} <a href="{{ path("program_show", {program: program.id}) }}">Découvrir cette série</a></p>
                 </li>
             {% else %}
                 <p>Aucune série trouvée</p>
