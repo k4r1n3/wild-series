@@ -5,7 +5,7 @@
         <ul>
             {% for program in programs %}
                 <li class="text-start"><p>{{ program.id }} - {{ program.title }}</p>
-                    <p>Description: {{ program.summary }} <a href="{{ path("program_show", {program: program.id}) }}">Découvrir cette série</a></p>
+                    <p>Description: {{ program.summary }} <a href="{{ path("program_show", {program: program.id}) }}" class="text-warning">Découvrir cette série</a></p>
                 </li>
             {% else %}
                 <p>Aucune série trouvée</p>
@@ -13,7 +13,7 @@
 
         </ul>
     </div>
-    <a class="text-warning" href="{{ path("category_index") }}" class="text-warning">
-    Retour à la liste des categories
+    <a href="{{ path("category_index") }}" class="ms-4 text-warning">
+    < Retour à la liste des categories
     </a>
 {% endblock %}

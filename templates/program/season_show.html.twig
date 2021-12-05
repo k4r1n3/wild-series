@@ -1,18 +1,22 @@
 {% extends 'base.html.twig' %}
 {%  block body %}
-    <div class="container text-light">
-        <h1>Série : {{ program.title }}</h1>
-        <img src="{{ program.poster }}" alt="{{ program.title }} affiche">
+    <div class="container">
+        <div class="justify-content-center text-lg-center text-light">
+            <h1>{{ program.title }}</h1>
+            <img class="justify-content-center" src="{{ program.poster }}" alt="{{ program.title }} affiche">
+        </div>
+        <div class="text-light">
         <ul>
             {% for episode in episodes %}
-                <div>
+                <div class="mt-4 p-2">
                     <li>
-                        <p>{{ episode.number }} - {{ episode.title }}</p>
+                        <p class="fw-bold">Saison {{ season.id }} - Episode {{ episode.number }} - {{ episode.title }}</p>
                         <p>{{ episode.synopsis }}</p>
-                        <a href="{{ path("program_episode_show", {program: program.id, season: season.id, episode: episode.id}) }}">Découvrir l'épisode.</a>
+                        <a href="{{ path("program_episode_show", {program: program.id, season: season.id, episode: episode.id}) }}" class="text-warning" >Découvrir l'épisode.</a>
                     </li>
                 </div>
             {% endfor %}
         </ul>
+        </div>
     </div>
 {% endblock %}
