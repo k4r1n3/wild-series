@@ -2,7 +2,9 @@
 // src/Controller/ProgramController.php
 namespace App\Controller;
 
+use App\Entity\Episode;
 use App\Entity\Program;
+use App\Entity\Season;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,10 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 Class ProgramController extends AbstractController
 {
     /**
-     * Shou all rows from Program's entity
-     *
      * @Route("/", name="index")
-     * @return Response A response instance
      */
     public function index(): Response
     {
@@ -30,23 +29,52 @@ Class ProgramController extends AbstractController
     }
 
      /**
-     * @Route("/{programId}/", requirements={"id"="[0-9]+"}, name="show", methods="GET")
+     * @Route("/{program}/", requirements={"id"="[0-9]+"}, name="show", methods="GET")
      */
 
-    public function show(int $programId)
+    public function show(Program $program): Response
     {
-        $program = $this->getDoctrine()
-            ->getRepository(Program::class) //ici je récupère le repository de la class Program qui vient sélectionner qu'un seul tuple
-            ->findOneBy(['id' => $programId]);
+        $seasons = $this->getDoctrine()
+            ->getRepository(Season::class) //ici je récupère le repository de la class Program qui vient sélectionner qu'un seul tuple
+            ->findBy(['program' => $program]);
 
         if (!$program) {
             throw $this->createNotFoundException(
-                'No program with id : '.$id.' found in program\'s table.'
+                $program->getTitle() . ' n\'a pas été trouvé.'
             );
         }
+
         return $this->render('program/show.html.twig', [
-            'program' => $program
+            'program' => $program,
+            'seasons' => $seasons,
         ]);
     }
 
+    /**
+     * @Route("/{program}/seasons/{season}", name="show_season")
+     */
+    public function showSeason(Program $program, Season $season)
+    {
+        $episodes = $this->getDoctrine()
+            ->getRepository(Episode::class)
+            ->findBy(['season' => $season]);
+
+        return $this->render('program/season_show.html.twig',[
+            'program'  => $program,
+            'season'   => $season,
+            'episodes' => $episodes,
+        ]);
+    }
+
+    /**
+     * @Route("/{program}/seasons/{season}/episode/{episode}", name="episode_show")
+     */
+    public function showEpisode(Program $program, Season $season, Episode $episode)
+    {
+        return $this->render('/program/episode_show.html.twig',[
+           'program' => $program,
+           'season'  => $season,
+           'episode' => $episode
+        ]);
+    }
 }
