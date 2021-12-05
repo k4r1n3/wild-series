@@ -1,13 +1,13 @@
-<nav class="navbar navbar-expand-lg border-bottom bg-light">
+<nav class="navbar navbar-expand-lg navbar-light border-bottom">
     <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <a class="nav-link active" aria-current="page" href="{{ path("app_index") }}">Home</a>
-                <a class="nav-link" href="{{ path("program_index") }}">Programs</a>
-                <a class="nav-link" href="{{ path("category_index") }}">Categories</a>
+        <h1 class="text-light">Wild Séries</h1>
+        <div class="collapse navbar-collapse m-3 fs-2 justify-content-end" id="navbarNavDropdown">
+                <a class="nav-link active text-warning" aria-current="page" href="{{ path("app_index") }}">Home</a>
+                <a class="nav-link text-warning" href="{{ path("program_index") }}">Programs</a>
+                <a class="nav-link text-warning" href="{{ path("category_index") }}">Categories</a>
             </div>
         </div>
     </div>

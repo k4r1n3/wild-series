@@ -2,9 +2,9 @@
 {% block body %}
     <h1 class="text-light">Toutes les catégories de séries : </h1>
     {% for category in categories %}
-        <div class="text-light">
-            <p>{{ loop.index }} / {{ category.id }} - {{ category.name }}</p>
-            <a href="{{ path("category_show", { categoryName: category.name }) }}">Voir la catégorie</a>
+        <div class="text-light ms-4 p-2">
+            <p>{{ category.id }} - {{ category.name }}</p>
+            <a href="{{ path("category_show", { categoryName: category.name }) }}" class="text-warning">Voir la catégorie</a>
         </div>
     {% else %}
         <div class="text-light">
@@ -12,5 +12,5 @@
         </div>
     {% endfor %}
 
-    <a class="text-warning" href="{{ path("app_index") }}">Retour à l'accueil</a>
+    <a class="text-warning text-decoration-none mt-4" href="{{ path("app_index") }}">< Retour à l'accueil</a>
 {% endblock %}

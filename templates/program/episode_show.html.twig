@@ -3,9 +3,9 @@
 <div class="container-fluid mt-2">
     <div class="text-light">
         <h1>{{ program.title }}</h1>
-        <p>{{ season.number }}</p>
-        <p>{{ season.description }}</p>
+        <p>Saison {{ season.number }}</p>
         <p>{{ episode.number }} - {{ episode.title }}</p>
+        <p>Résumé : {{ episode.synopsis }}</p>
     </div>
     <a class="text-warning" href="{{ path('program_index') }}">
         Retour à la liste des programmes
