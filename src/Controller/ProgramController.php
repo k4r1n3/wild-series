@@ -1,13 +1,17 @@
 <?php
-// src/Controller/ProgramController.php
+
 namespace App\Controller;
 
 use App\Entity\Episode;
 use App\Entity\Program;
 use App\Entity\Season;
+use App\Form\ProgramType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpFoundation\Request;
+
 
 /**
  * @Route("/program", name="program_")
@@ -28,10 +32,39 @@ Class ProgramController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/new", name="new")
+     */
+    public function new(Request $request): Response
+    {
+        // Create a new Program Object
+        $program = new Program();
+        // Create the associated form
+        $form = $this->createForm(ProgramType::class, $program);
+        // Get data from HTTP request
+        $form->handleRequest($request);
+        // Was the form submitted ?
+        if ($form->isSubmitted()) {
+            // Deal with the submitted data
+            // Get the Entity Manager
+            $entityManager = $this->getDoctrine()->getManager();
+            // Persist Category Object
+            $entityManager->persist($program);
+            // Flush the persisted object
+            $entityManager->flush();
+            // Finally redirect to program list
+            return $this->redirectToRoute('program_index');
+        }
+        // Render the form
+        return $this->render('program/new.html.twig', [
+            "form" => $form->createView(),
+        ]);
+    }
+
+
      /**
      * @Route("/{program}/", requirements={"id"="[0-9]+"}, name="show", methods="GET")
      */
-
     public function show(Program $program): Response
     {
         $seasons = $this->getDoctrine()
